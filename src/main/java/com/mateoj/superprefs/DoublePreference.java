@@ -3,36 +3,27 @@ package com.mateoj.superprefs;
 import android.content.SharedPreferences;
 
 /**
- * Created by jose on 5/29/15.
+ * Double preference
  */
-public class DoublePreference {
-    private final SharedPreferences preferences;
-    private final String key;
-    private final double defaultValue;
+public class DoublePreference extends AbstractPreference<Double>{
 
     public DoublePreference(SharedPreferences preferences, String key) {
         this(preferences, key, 0);
     }
+
     public DoublePreference(SharedPreferences preferences, String key, double defaultValue) {
-        this.preferences = preferences;
-        this.key = key;
-        this.defaultValue = defaultValue;
+        super(preferences, key, defaultValue);
     }
 
-    public double get() {
+    @Override
+    public Double get() {
         return Double.longBitsToDouble(
                 preferences.getLong(key, Double.doubleToLongBits(defaultValue)));
     }
 
-    public boolean isSet() {
-        return preferences.contains(key);
-    }
-
-    public void set(double value) {
+    @Override
+    public void set(Double value) {
         preferences.edit().putLong(key, Double.doubleToLongBits(value)).apply();
-    }
 
-    public void delete() {
-        preferences.edit().remove(key).apply();
     }
 }

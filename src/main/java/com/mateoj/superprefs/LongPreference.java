@@ -3,36 +3,25 @@ package com.mateoj.superprefs;
 import android.content.SharedPreferences;
 
 /**
- * Created by jose on 5/29/15.
+ * Long Preference
  */
-public class LongPreference {
-    private final SharedPreferences preferences;
-    private final String key;
-    private final long defaultValue;
+public class LongPreference extends AbstractPreference<Long>{
 
     public LongPreference(SharedPreferences preferences, String key) {
         this(preferences, key, 0);
     }
 
     public LongPreference(SharedPreferences preferences, String key, long defaultValue) {
-        this.preferences = preferences;
-        this.key = key;
-        this.defaultValue = defaultValue;
+        super(preferences, key, defaultValue);
     }
 
-    public long get() {
+    @Override
+    public Long get() {
         return preferences.getLong(key, defaultValue);
     }
 
-    public boolean isSet() {
-        return preferences.contains(key);
-    }
-
-    public void set(long value) {
+    @Override
+    public void set(Long value) {
         preferences.edit().putLong(key, value).apply();
-    }
-
-    public void delete() {
-        preferences.edit().remove(key).apply();
     }
 }

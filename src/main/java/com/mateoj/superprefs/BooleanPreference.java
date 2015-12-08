@@ -3,35 +3,25 @@ package com.mateoj.superprefs;
 import android.content.SharedPreferences;
 
 /**
- * Created by jose on 5/29/15.
+ * Boolean Preference
  */
-public class BooleanPreference {
-    private final SharedPreferences preferences;
-    private final String key;
-    private final boolean defaultValue;
+public class BooleanPreference extends AbstractPreference<Boolean> {
 
     public BooleanPreference(SharedPreferences preferences, String key) {
         this(preferences, key, false);
     }
     public BooleanPreference(SharedPreferences preferences, String key, boolean defaultValue) {
-        this.preferences = preferences;
-        this.key = key;
-        this.defaultValue = defaultValue;
+        super(preferences, key, defaultValue);
     }
 
-    public boolean get() {
+    @Override
+    public Boolean get() {
         return preferences.getBoolean(key, defaultValue);
     }
 
-    public boolean isSet() {
-        return preferences.contains(key);
-    }
-
-    public void set(boolean value) {
+    @Override
+    public void set(Boolean value) {
         preferences.edit().putBoolean(key, value).apply();
-    }
 
-    public void delete() {
-        preferences.edit().remove(key).apply();
     }
 }

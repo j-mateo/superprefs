@@ -3,36 +3,26 @@ package com.mateoj.superprefs;
 import android.content.SharedPreferences;
 
 /**
- * Created by jose on 5/29/15.
+ * Integer preference
  */
-public class IntPreference {
-    private final SharedPreferences preferences;
-    private final String key;
-    private final int defaultValue;
+public class IntPreference extends AbstractPreference<Integer> {
 
     public IntPreference(SharedPreferences preferences, String key) {
         this(preferences, key, 0);
     }
 
     public IntPreference(SharedPreferences preferences, String key, int defaultValue) {
-        this.preferences = preferences;
-        this.key = key;
-        this.defaultValue = defaultValue;
+        super(preferences, key, defaultValue);
     }
 
-    public int get() {
+    @Override
+    public Integer get() {
         return preferences.getInt(key, defaultValue);
     }
 
-    public boolean isSet() {
-        return preferences.contains(key);
-    }
-
-    public void set(int value) {
+    @Override
+    public void set(Integer value) {
         preferences.edit().putInt(key, value).apply();
     }
 
-    public void delete() {
-        preferences.edit().remove(key).apply();
-    }
 }
